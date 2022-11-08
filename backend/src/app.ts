@@ -57,7 +57,7 @@ app.use(
 );
 
 Queue.process();
-setQueues(Queue.queues.map((q: any) => new BullAdapter(q.bull)));
+setQueues(Queue.queues.map((q: any) => new BullAdapter(q.bull)) as any);
 
 if (process.env.AMQP_URL) {
   (async () => {
