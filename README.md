@@ -124,13 +124,13 @@ sudo apt-get install -y libgbm-dev wget unzip fontconfig locales gconf-service l
 Clone este repositório tipo 1
 
 ```bash
-git clone git@github.com:w3nder/izing.io-1.git
+git clone git@github.com:ldurans/izing.io.git
 ```
 
 Clone este repositório tipo 2
 
 ```bash
-git clone https://github.com/w3nder/izing.io-1.git
+git clone https://github.com/ldurans/izing.io.git
 ```
 
 Navegue até a pasta backend e crie o arquivo .env:
@@ -303,7 +303,7 @@ Clone o repositório:
 
 ```bash
 cd  ~
-git https://github.com/w3nder/izing.io-1
+git https://github.com/ldurans/izing.io.git
 ```
 
 Na pasta backend, crie o arquivo .env:
