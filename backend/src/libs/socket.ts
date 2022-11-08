@@ -15,6 +15,7 @@ export const initIO = (httpServer: Server): SocketIO => {
   io.adapter(
     socketRedis({
       host: process.env.IO_REDIS_SERVER,
+      password: process.env.IO_REDIS_PASSWORD || undefined,
       port: Number(process.env.IO_REDIS_PORT)
     })
   );
