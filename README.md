@@ -64,17 +64,73 @@ Instale o rabbitmq;
 Instale o redis;
 Instale node 14.* via nvm
 ```
+
+Instalar o Docker Linux 
+
+```bash
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+sudo apt update
+sudo apt install docker-ce
+sudo systemctl status docker
+sudo usermod -aG docker ${USER}
+su - ${USER}
+```
+
+Instalar o Postgres Docker 
+
+```bash
+docker run --name postgresql -e POSTGRES_USER=whaticket -e POSTGRES_PASSWORD=SuaSenha -p 5432:5432 -v /data:/var/lib/postgresql/data -d postgres
+```
+
+Instalar o Redis Docker 
+
+```bash
+docker run -e TZ="America/Sao_Paulo" --name redis-whaticket -p 6379:6379 -d --restart=always redis:latest redis-server --appendonly yes --requirepass "SuaSenha"
+```
+
+Instalar o Redis RABBITMQ 
+
+```bash
+docker run \
+-e RABBITMQ_DEFAULT_USER=SeuUser \
+-e RABBITMQ_DEFAULT_PASS=SuaSenha \
+-p 5672:5672 \
+rabbitmq
+```
  
+Install Python (precisa para o build do frontend):
+
+```bash
+sudo apt-add-repository universe
+sudo apt update
+sudo apt install python2-minimal
+```
+
+
+Install build-essential:
+
+```bash
+sudo apt-get install build-essential
+```
+
 Install puppeteer dependencies:
 
 ```bash
 sudo apt-get install -y libgbm-dev wget unzip fontconfig locales gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils
 ```
 
-Clone este repositório
+Clone este repositório tipo 1
 
 ```bash
-git clone git@github.com:ldurans/izing.io.git
+git clone git@github.com:w3nder/izing.io-1.git
+```
+
+Clone este repositório tipo 2
+
+```bash
+git clone https://github.com/w3nder/izing.io-1.git
 ```
 
 Navegue até a pasta backend e crie o arquivo .env:
@@ -87,7 +143,7 @@ nano .env
 Edite os valores das variáveis do arquivo `.env`:
 
 ```bash
-NODE_ENV=DEVELOPMENT #it helps on debugging
+NODE_ENV=DEVELOPMENT #it helps on debugging quando for para produção você muda para prod
 BACKEND_URL=http://localhost
 FRONTEND_URL=https://localhost:3000
 PROXY_PORT=8080
@@ -122,14 +178,14 @@ Instale as dependências do backend e execute as migrações e carga de dados in
 ```bash
 npm install
 npm run build
-npx sequelize db:migrate
-npx sequelize db:seed:all
+npm run db:migrate
+npm run db:seed:all
 ```
 
 Inicie o backend:
 
 ```bash
-npm start
+npm start ou npm run dev:server
 ```
 
 Abra um novo terminal e navegue até a pasta do frontend.
@@ -137,7 +193,7 @@ Abra um novo terminal e navegue até a pasta do frontend.
 Instale as dependências do backend e execute as migrações e carga de dados iniciais:
 
 ```bash
-npm install
+npm install --force
 ```
 
 
@@ -157,15 +213,56 @@ Inicie o frontend (suponto que já possua instalado as cli do vue e quasar):
 ```bash
 quasar c && quasar d
 ```
+
+Inicie o frontend (caso não tem instalado as cli do vue e quasar):
+```bash
+npx quasar c && npx quasar d
+```
   
 ## Guia básico para produção (Ubuntu >= 18.04 VPS)
 
+Instalar o Docker Linux 
+
+```bash
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+sudo apt update
+sudo apt install docker-ce
+sudo systemctl status docker
+sudo usermod -aG docker ${USER}
+su - ${USER}
 ```
-Instale o postgres;
-Instale o rabbitmq;
-Instale o redis;
+
+Instalar o Postgres Docker 
+
+```bash
+docker run --name postgresql -e POSTGRES_USER=whaticket -e POSTGRES_PASSWORD=SuaSenha -p 5432:5432 -v /data:/var/lib/postgresql/data -d postgres
+```
+
+Instalar o Redis Docker 
+
+```bash
+docker run -e TZ="America/Sao_Paulo" --name redis-whaticket -p 6379:6379 -d --restart=always redis:latest redis-server --appendonly yes --requirepass "SuaSenha"
+```
+
+Instalar o Redis RABBITMQ 
+
+```bash
+docker run \
+-e RABBITMQ_DEFAULT_USER=SeuUser \
+-e RABBITMQ_DEFAULT_PASS=SuaSenha \
+-p 5672:5672 \
+rabbitmq
 ```
  
+Install Python (precisa para o build do frontend):
+
+```bash
+sudo apt-add-repository universe
+sudo apt update
+sudo apt install python2-minimal
+```
 
 As instruções assumem que não está executando como root. Vamos iniciar criando um usuário e as permissões necessárias.
 
@@ -206,14 +303,14 @@ Clone o repositório:
 
 ```bash
 cd  ~
-git clone git@github.com:ldurans/izing.io.git
+git https://github.com/w3nder/izing.io-1
 ```
 
 Na pasta backend, crie o arquivo .env:
 
 ```bash
-cp izing/backend/.env.example izing/backend/.env
-nano izing/backend/.env
+cp izing.io-1/backend/.env.example izing.io-1/backend/.env
+nano izing.io-1/backend/.env
 ```
 
 ```bash
@@ -248,6 +345,19 @@ FACEBOOK_APP_ID=
 FACEBOOK_APP_SECRET_KEY=
 
 ```
+Install Python (precisa para o build do frontend):
+
+```bash
+sudo apt-add-repository universe
+sudo apt update
+sudo apt install python2-minimal
+```
+
+Install build-essential:
+
+```bash
+sudo apt-get install build-essential
+```
 
 Instale as dependências do puppeteer:
 
@@ -258,11 +368,11 @@ sudo apt-get install -y libgbm-dev wget unzip fontconfig locales gconf-service l
 Instale as dependências do backend e execute as migrações e carga de dados iniciais:
 
 ```bash
-cd izing/backend
+cd izing.io-1/backend
 npm install
 npm run build
-npx sequelize db:migrate
-npx sequelize db:seed:all
+npm run db:migrate
+npm run db:seed:all
 ```
 
 
@@ -304,7 +414,7 @@ FACEBOOK_APP_ID='1554345554575413' # id do app criado na console do facebook
 
 Faça o build do front:
 ```bash
-quasar build -P -m pwa
+npx quasar build -P -m pwa
 ```
 
 ___
@@ -329,13 +439,20 @@ sudo nano /etc/nginx/sites-available/izing-backend
 
 ```bash
 server {
-  server_name api.mydomain.com;
+  server_name myapp.mydomain.com;
 
   location / {
-    proxy_pass http://127.0.0.1:8080;
-......
+    proxy_pass http://127.0.0.1:3000;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_cache_bypass $http_upgrade;
+  }
 }
-
 ```
 
 Crie o site para o Front
