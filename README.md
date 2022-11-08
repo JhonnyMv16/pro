@@ -179,7 +179,7 @@ Instale as dependências do backend e execute as migrações e carga de dados in
 npm install
 npm run build
 npm run db:migrate
-npm run db:seed:all
+npm run db:seed
 ```
 
 Inicie o backend:
@@ -372,7 +372,7 @@ cd izing.io-1/backend
 npm install
 npm run build
 npm run db:migrate
-npm run db:seed:all
+npm run db:seed
 ```
 
 
