@@ -186,7 +186,10 @@ FACEBOOK_APP_ID=''
 ```
 
 ```bash
-npx quasar build -P -m pwa
+
+npm i -g @quasar/cli
+quasar build -P -m pwa
+
 ```
 
 Instale o pm2 **com sudo** e inicie o backend com ele:
