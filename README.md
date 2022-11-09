@@ -176,6 +176,7 @@ Vá para a pasta frontend e instale as dependências:
 
 ```bash
 cd ../frontend
+npm install
 cp .env.example .env
 nano .env
 ```
@@ -189,6 +190,14 @@ FACEBOOK_APP_ID=''
 
 npm i -g @quasar/cli
 quasar build -P -m pwa
+
+```
+
+se você não deseja instalar o quasar cli
+
+```bash
+
+npx quasar build -P -m pwa
 
 ```
 
