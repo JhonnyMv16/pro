@@ -57,6 +57,19 @@ Instalar o pacote  build-essential:
 sudo apt-get install build-essential
 ```
 
+```bash
+sudo apt update && sudo apt upgrade
+```
+
+Instale o node (14.x) e confirme se o comando do node -v e npm -v está disponível:
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt-get install -y nodejs
+node -v
+npm -v
+```
+
 Todas as instruções abaixo assumem que você NÃO está executando como root, pois vai dar erro no puppeteer. Então vamos começar a criar um novo usuário e conceder privilégios sudo a ele:
 
 ```bash
