@@ -168,8 +168,8 @@ Executa o npm install (com a flag --force), cria o build cria as tabela e insere
 cd izing/backend
 npm install --force
 npm run build
-npn run db:migrate
-npn run db:seed
+npm run db:migrate
+npm run db:seed
 ```
 
 Vá para a pasta frontend e instale as dependências:
